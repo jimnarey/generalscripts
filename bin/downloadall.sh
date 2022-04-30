@@ -1,7 +1,7 @@
 #!/bin/bash 
  
 this_usage () {
-    echo "Usage: $(basename $0) [url]"
+    echo "Usage: $(basename $0) [url] [ext]"
     exit 0
 }
 
@@ -11,7 +11,8 @@ then
 fi
 
 lynx -listonly -nonumbers -dump -hiddenlinks=ignore $1 | tee .links.txt
+cat .links.txt | grep "$2$" | tee .downloads.txt
 
-while read url; do axel $url -a -c; done < .links.txt 
+while read url; do axel $url -a -c; done < .downloads.txt 
 
-rm .links.txt
+# rm .links.txt .downloads.txt
