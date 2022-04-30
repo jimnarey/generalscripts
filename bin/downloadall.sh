@@ -12,6 +12,9 @@ fi
 
 lynx -listonly -nonumbers -dump -hiddenlinks=ignore $1 | tee .links.txt
 cat .links.txt | grep "$2$" | tee .downloads.txt
+sed -i 's/ /%20/g' .downloads.txt
+
+cat .downloads.txt
 
 while read url; do axel $url -a -c; done < .downloads.txt 
 
