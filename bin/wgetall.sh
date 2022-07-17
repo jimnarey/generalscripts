@@ -16,6 +16,6 @@ sed -i 's/ /%20/g' .downloads.txt
 
 cat .downloads.txt
 
-while read url; do axel $url -a -c; done < .downloads.txt
+wget -i .downloads.txt
 
 rm .links.txt .downloads.txt
